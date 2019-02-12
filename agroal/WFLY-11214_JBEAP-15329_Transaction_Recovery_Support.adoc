@@ -1,0 +1,64 @@
+-= WFLY-11214 - Transaction Recovery support in the Agroal subsystem
+:author:            Luis Barreiro
+:email:             lbarreiro@redhat.com
+:toc:               left
+:icons:             font
+:idprefix:
+:idseparator:       -
+:issue-base-url:    https://issues.jboss.org/browse
+
+== Overview
+
+The Agroal subsystem provides an alternative to the current datasources subsystem based on IronJacamar.
+Although not all features are supported in both subsystems, transaction recovery for XA DataSources is something that is currently not supported in Agroal datasources.
+
+== Issue Metadata
+
+=== Issue
+
+* {issue-base-url}/WFLY-11214[WFLY-11214]
+
+=== Related Issues
+
+* {issue-base-url}/JBEAP-15329[JBEAP-15329]
+
+=== Dev Contacts
+
+* mailto:{email}[{author}]
+
+=== QE Contacts
+
+* mailto:msimka@redhat.com[Martin Simka]
+
+=== Affected Projects or Components
+
+* WildFly
+
+=== Other Interested Projects
+
+* Agroal
+
+== Requirements
+
+* The support for Transaction recovery has been added to the Agroal library and that feature needs to be exposed on WildFly. New attributes are necessary to be added to the model in order to properly configure the feature.
+* There are situations where authentication for recovery connections needs to be different than for regular connections (for instance, when more privileges are needed).
+
+=== Hard Requirements
+
+* Transaction recovery will be enabled by default for XA DataSources, but a new boolean attribute may disable the feature.
+* New authentication attributes, both username/password and elytron, need to be added for recovery connections, much like the existing for regular connections.
+
+=== Nice-to-Have Requirements
+
+
+=== Non-Requirements
+
+
+== Test Plan
+
+* The transaction recovery feature is tested in in both Agroal and the Narayana projects
+
+== Community Documentation
+
+* Described in the WildFly Admin Guide how to configure the feature.
+* The runtime model for the subsystem will be documented in https://wildscribe.github.io[WildScribe]
